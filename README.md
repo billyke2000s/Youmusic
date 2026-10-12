@@ -24,6 +24,9 @@ Spotify:
 
 - 🔒 **Keeps playing with the screen locked**
 - 📱 **Keeps playing when you switch to another app**
+- 🎛️ **Proper music controls.** Song title, channel and artwork in your
+  notifications and on your lock screen, with ⏮ ⏯ ⏭ buttons and a seek bar.
+- 🎧 **Headphone and Bluetooth buttons work.** Unplugging headphones pauses.
 - 📋 **One big paste box.** Copy a link, paste it, done.
 - 🌐 **Full YouTube inside.** Tap *Browse YouTube* to search and scroll like normal.
 - 📤 **Share straight to it.** In the YouTube app tap **Share → YouMusic**.
@@ -57,7 +60,8 @@ All versions are on the [Releases page](https://github.com/billyke2000s/Youmusic
 1. Copy a video link in YouTube (**Share → Copy link**).
 2. Open YouMusic and tap **Paste from clipboard**.
 3. Tap **Play**.
-4. Lock your phone or go to another app. The music carries on.
+4. Lock your phone, press home, or go to another app. The music carries on.
+5. Control it from the notification, the lock screen or your headphones.
 
 ### 🔍 Browse
 
@@ -71,8 +75,12 @@ It opens and starts playing.
 
 ### ⏹️ Stop
 
-Tap **Stop** on the YouMusic notification, or open the app and press back until
-you leave the player.
+- **Pause:** tap ⏸ in the notification or on the lock screen.
+- **Close completely:** tap ✕ in the notification, or swipe YouMusic away in your
+  recent apps.
+
+Pressing back on the first page doesn't stop the music. It tucks the app away
+in the background, like Spotify does.
 
 ---
 
@@ -104,6 +112,14 @@ Some phones are aggressive about closing apps in the background. Try this:
 
 If it still stops, please [report it](https://github.com/billyke2000s/Youmusic/issues/new?template=bug_report.md)
 with your phone model and Android version.
+</details>
+
+<details>
+<summary><b>Why does the music stop when I swipe YouMusic away?</b></summary>
+
+Swiping an app out of your recent apps tells Android to close it, and YouMusic's
+player lives inside the app. Use the home button instead, and the music keeps
+going. To stop it, tap ✕ on the notification.
 </details>
 
 <details>

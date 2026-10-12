@@ -2,6 +2,26 @@
 
 All notable changes to YouMusic are listed here.
 
+## [1.1] - 2026-10-12
+
+### Fixed
+- **Music stopped as soon as you left the app.** Android was telling the page it
+  was hidden, and the page then paused. The player now always reports itself as
+  visible, so music keeps going when you press home, switch apps or lock the
+  screen.
+
+### Added
+- Real media-player notification: song title, channel, artwork, seek bar and
+  ⏮ ⏯ ⏭ ✕ buttons. Also shows on the lock screen.
+- Headphone, Bluetooth and lock-screen controls.
+- Unplugging headphones pauses.
+- If YouTube pauses by itself while the app is in the background (for example
+  "Continue watching?"), YouMusic resumes it.
+
+### Changed
+- Back on the first page sends the app to the background instead of closing it.
+  Use ✕ in the notification, or swipe the app away, to stop.
+
 ## [1.0.5] - 2026-10-12
 
 ### Fixed
