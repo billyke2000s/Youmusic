@@ -2,6 +2,17 @@
 
 All notable changes to YouMusic are listed here.
 
+## [1.0.5] - 2026-10-12
+
+### Fixed
+- Updates now install over older versions. All builds are signed with the same key,
+  and the version number goes up with every build. **If you installed v1.0.4 or
+  earlier, uninstall it once before installing this version.**
+
+### Changed
+- README rewritten for people using the app. Build and code details moved to
+  `DEVELOPMENT.md`.
+
 ## [1.0] - 2026-10-12
 
 ### Added

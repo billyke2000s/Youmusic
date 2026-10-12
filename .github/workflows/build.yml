@@ -40,7 +40,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          VERSION=$(grep -oP "versionName '\K[^']+" app/build.gradle)
+          VERSION=$(grep -oP "def baseVersion = '\K[^']+" app/build.gradle)
           TAG="v${VERSION}.${{ github.run_number }}"
           SHORT_SHA=$(git rev-parse --short HEAD)
           NOTES="Automatic build from commit ${SHORT_SHA}.

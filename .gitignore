@@ -11,9 +11,11 @@ captures/
 .externalNativeBuild/
 .cxx/
 
-# Signing keys - never commit these
+# Signing keys - never commit these...
 *.jks
 *.keystore
+# ...except the shared build key, which keeps updates installable (see DEVELOPMENT.md)
+!app/debug.keystore
 
 # OS junk
 .DS_Store

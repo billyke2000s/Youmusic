@@ -28,4 +28,4 @@ a lot between phone makers.
 
 ## Building
 
-See [Building it yourself](README.md#building-it-yourself) in the README.
+See [DEVELOPMENT.md](DEVELOPMENT.md#building).

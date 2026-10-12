@@ -2,6 +2,11 @@ plugins {
     id 'com.android.application'
 }
 
+// Bump this by hand for big releases. The build number from GitHub Actions is
+// added on the end automatically, e.g. 1.0 -> 1.0.7
+def baseVersion = '1.0'
+def buildNumber = (System.getenv('GITHUB_RUN_NUMBER') ?: '1').toInteger()
+
 android {
     namespace 'com.youmusic.app'
     compileSdk 34
@@ -10,11 +15,27 @@ android {
         applicationId 'com.youmusic.app'
         minSdk 24
         targetSdk 34
-        versionCode 1
-        versionName '1.0'
+        // Must go up every release, or Android refuses to update the app.
+        versionCode buildNumber
+        versionName "${baseVersion}.${buildNumber}"
+    }
+
+    // Every build is signed with the same committed key (app/debug.keystore).
+    // Without this, each GitHub build gets a new random key and Android refuses
+    // to install a new version over an old one ("App not installed").
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled false
         }
