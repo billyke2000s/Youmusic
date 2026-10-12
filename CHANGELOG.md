@@ -16,3 +16,4 @@ All notable changes to YouMusic are listed here.
   playlists and bare video IDs.
 - Fullscreen video support.
 - GitHub Actions workflow that builds the APK on every push.
+- Every push to `main` publishes a GitHub Release with `YouMusic.apk` attached.

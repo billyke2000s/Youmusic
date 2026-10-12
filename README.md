@@ -52,14 +52,17 @@ What it does **not** do: block ads, download videos, or save offline music.
 
 ## Install
 
-1. Open the latest successful run on the
-   [Actions tab](https://github.com/billyke2000s/Youmusic/actions/workflows/build.yml).
-2. Scroll down to **Artifacts** and download **YouMusic-apk** (you must be signed in to GitHub).
-3. Unzip it. Inside is `app-debug.apk`.
-4. Open `app-debug.apk` on your phone. If Android asks, allow your file manager or
-   browser to **install unknown apps**.
-5. On Android 13 and newer, allow notifications when the app asks. The background
+### ⬇️ [Download YouMusic.apk](https://github.com/billyke2000s/Youmusic/releases/latest/download/YouMusic.apk)
+
+1. Tap the link above, or go to the
+   [Releases page](https://github.com/billyke2000s/Youmusic/releases/latest) and
+   download **YouMusic.apk**.
+2. Open `YouMusic.apk` on your phone. If Android asks, allow your browser or file
+   manager to **install unknown apps**.
+3. On Android 13 and newer, allow notifications when the app asks. The background
    notification is part of what keeps the app alive.
+
+To update, download the latest APK and install it over the old one.
 
 Requires **Android 7.0 (API 24) or newer**.
 
@@ -181,8 +184,10 @@ Youmusic/
 
 ### Option 1: GitHub Actions (no setup)
 
-Every push to this repo builds the APK automatically. You can also start a build by
-hand: **Actions → Build YouMusic APK → Run workflow**.
+Every push to this repo builds the APK automatically. Pushes to `main` also publish a
+new release (tagged `v<version>.<build number>`, e.g. `v1.0.4`) with `YouMusic.apk`
+attached. You can also start a build by hand: **Actions → Build YouMusic APK → Run
+workflow**.
 
 ### Option 2: On your own computer
 

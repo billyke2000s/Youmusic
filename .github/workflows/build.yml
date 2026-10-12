@@ -4,6 +4,10 @@ on:
   push:
   workflow_dispatch:
 
+# Needed so the workflow can create releases and upload the APK to them.
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,13 +23,30 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Show Android SDK location
-        run: echo "ANDROID_HOME=$ANDROID_HOME" && ls "$ANDROID_HOME"
-
       - name: Build debug APK
         run: gradle assembleDebug --no-daemon
+
+      - name: Rename APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk YouMusic.apk
 
       - uses: actions/upload-artifact@v4
         with:
           name: YouMusic-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: YouMusic.apk
+
+      # Every push to main becomes a release on the Releases page, with the APK attached.
+      - name: Publish release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION=$(grep -oP "versionName '\K[^']+" app/build.gradle)
+          TAG="v${VERSION}.${{ github.run_number }}"
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          NOTES="Automatic build from commit ${SHORT_SHA}.
+
+          **Install:** download YouMusic.apk below, open it on your phone and allow 'install unknown apps' if asked.
+
+          Requires Android 7.0 or newer. Background playback is experimental, see the README for details.
+          See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for what changed."
+          gh release create "$TAG" YouMusic.apk --title "YouMusic $TAG" --latest --notes "$NOTES"
