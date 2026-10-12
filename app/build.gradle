@@ -4,7 +4,7 @@ plugins {
 
 // Bump this by hand for big releases. The build number from GitHub Actions is
 // added on the end automatically, e.g. 1.0 -> 1.0.7
-def baseVersion = '1.0'
+def baseVersion = '1.1'
 def buildNumber = (System.getenv('GITHUB_RUN_NUMBER') ?: '1').toInteger()
 
 android {
