@@ -118,8 +118,11 @@ Youmusic/
 
 ### On GitHub (no setup)
 
-Every push builds the APK. Pushes to `main` also publish a release tagged
-`v<baseVersion>.<run number>` (e.g. `v1.0.7`) with `YouMusic.apk` attached.
+Every push builds the APK. A push to `main` that changes anything under `app/`
+also publishes a release tagged `v<baseVersion>.<run number>` (e.g. `v1.1.8`) with
+`YouMusic.apk` attached. Its notes are the newest section of `CHANGELOG.md`, so
+update that, in plain language for users, before pushing an app change.
+Docs-only pushes build but don't release.
 To build by hand: **Actions → Build YouMusic APK → Run workflow**.
 
 ### On your computer

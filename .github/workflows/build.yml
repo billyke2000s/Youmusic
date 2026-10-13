@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2   # so we can see what the latest commit changed
 
       - uses: actions/setup-java@v5
         with:
@@ -34,19 +36,20 @@ jobs:
           name: YouMusic-apk
           path: YouMusic.apk
 
-      # Every push to main becomes a release on the Releases page, with the APK attached.
+      # A push to main that changes the app itself becomes a release, with the APK
+      # attached. Pushes that only touch docs still build, but don't make a release.
       - name: Publish release
         if: github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          if ! git diff --name-only HEAD~1 HEAD | grep -q '^app/'; then
+            echo "No app changes in this commit, skipping release."
+            exit 0
+          fi
           VERSION=$(grep -oP "def baseVersion = '\K[^']+" app/build.gradle)
           TAG="v${VERSION}.${{ github.run_number }}"
-          SHORT_SHA=$(git rev-parse --short HEAD)
-          NOTES="Automatic build from commit ${SHORT_SHA}.
-
-          **Install:** download YouMusic.apk below, open it on your phone and allow 'install unknown apps' if asked.
-
-          Requires Android 7.0 or newer. Background playback is experimental, see the README for details.
-          See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for what changed."
-          gh release create "$TAG" YouMusic.apk --title "YouMusic $TAG" --latest --notes "$NOTES"
+          # Release notes = the newest section of CHANGELOG.md (without its heading).
+          awk '/^## /{n++; next} n==1' CHANGELOG.md > notes.md
+          printf '\n---\n**Install:** download **YouMusic.apk** below on your Android phone and open it.\n' >> notes.md
+          gh release create "$TAG" YouMusic.apk --title "YouMusic ${VERSION}" --latest --notes-file notes.md
